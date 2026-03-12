@@ -55,8 +55,8 @@ router.post("/send-alert", async (req, res) => {
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center" style="padding-bottom:24px;">
-                    <div style="width:64px;height:64px;background-color:#fff1f4;border-radius:50%;margin:0 auto;line-height:64px;text-align:center;">
-                      <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="alert" width="32" style="vertical-align:middle;margin-top:16px;" />
+                    <div style="width:64px;height:64px;background-color:#fff1f4;border-radius:50%;margin:0 auto;text-align:center;line-height:64px;">
+                      <span style="font-size:28px;line-height:64px;display:inline-block;vertical-align:middle;color:#fe2c55;font-weight:700;">!</span>
                     </div>
                   </td>
                 </tr>
