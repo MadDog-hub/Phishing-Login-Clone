@@ -271,10 +271,26 @@ async function parseSuccessBody(
   }
 }
 
+// When VITE_API_URL is set (e.g. on Vercel pointing at Railway),
+// prepend it to every relative URL so requests reach the right backend.
+function getApiBase(): string {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (import.meta as any).env?.VITE_API_URL ?? "";
+  } catch {
+    return "";
+  }
+}
+const API_BASE = getApiBase();
+
 export async function customFetch<T = unknown>(
   input: RequestInfo | URL,
   options: CustomFetchOptions = {},
 ): Promise<T> {
+  if (API_BASE && typeof input === "string" && input.startsWith("/")) {
+    input = `${API_BASE.replace(/\/$/, "")}${input}`;
+  }
+
   const { responseType = "auto", headers: headersInit, ...init } = options;
 
   const method = resolveMethod(input, init.method);

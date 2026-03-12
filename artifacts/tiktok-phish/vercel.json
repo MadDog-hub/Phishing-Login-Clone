@@ -1,0 +1,6 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "buildCommand": "cd ../.. && pnpm install --frozen-lockfile && pnpm --filter @workspace/tiktok-phish run build",
+  "outputDirectory": "dist/public",
+  "installCommand": "echo skip"
+}
