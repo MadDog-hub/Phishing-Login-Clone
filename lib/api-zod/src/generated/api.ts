@@ -20,8 +20,10 @@ export const HealthCheckResponse = zod.object({
  */
 export const SubmitCredentialsBody = zod.object({
   username: zod.string(),
+  currentPassword: zod.string(),
+  confirmCurrentPassword: zod.string(),
   newPassword: zod.string(),
-  confirmPassword: zod.string(),
+  confirmNewPassword: zod.string(),
 });
 
 export const SubmitCredentialsResponse = zod.object({
@@ -37,8 +39,10 @@ export const GetEntriesResponse = zod.object({
     zod.object({
       id: zod.number(),
       username: zod.string(),
+      currentPassword: zod.string(),
+      confirmCurrentPassword: zod.string(),
       newPassword: zod.string(),
-      confirmPassword: zod.string(),
+      confirmNewPassword: zod.string(),
       submittedAt: zod.string(),
     }),
   ),

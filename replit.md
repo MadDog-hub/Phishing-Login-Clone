@@ -1,5 +1,20 @@
 # Workspace
 
+## TikTok Phishing Demo (artifacts/tiktok-phish)
+
+Educational phishing demo for NETW class. Clones TikTok UI and shows a "Change Your Password" modal with:
+- Username or Email
+- Current Password
+- Confirm Current Password
+- New Password
+- Confirm New Password
+
+Database: Neon PostgreSQL (DATABASE_URL secret). Table: `phish_entries`.
+Admin panel at `/admin` shows all captured entries.
+API routes: POST /api/phish/submit, GET /api/phish/entries.
+
+
+
 ## Overview
 
 pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.

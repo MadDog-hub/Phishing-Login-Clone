@@ -9,7 +9,9 @@
 export interface CapturedEntry {
   id: number;
   username: string;
+  currentPassword: string;
+  confirmCurrentPassword: string;
   newPassword: string;
-  confirmPassword: string;
+  confirmNewPassword: string;
   submittedAt: string;
 }

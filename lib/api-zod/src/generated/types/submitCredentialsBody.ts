@@ -8,6 +8,8 @@
 
 export interface SubmitCredentialsBody {
   username: string;
+  currentPassword: string;
+  confirmCurrentPassword: string;
   newPassword: string;
-  confirmPassword: string;
+  confirmNewPassword: string;
 }

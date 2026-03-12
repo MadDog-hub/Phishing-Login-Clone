@@ -11,8 +11,10 @@ export interface HealthStatus {
 
 export interface SubmitCredentialsBody {
   username: string;
+  currentPassword: string;
+  confirmCurrentPassword: string;
   newPassword: string;
-  confirmPassword: string;
+  confirmNewPassword: string;
 }
 
 export interface SubmitCredentialsResponse {
@@ -23,8 +25,10 @@ export interface SubmitCredentialsResponse {
 export interface CapturedEntry {
   id: number;
   username: string;
+  currentPassword: string;
+  confirmCurrentPassword: string;
   newPassword: string;
-  confirmPassword: string;
+  confirmNewPassword: string;
   submittedAt: string;
 }
 

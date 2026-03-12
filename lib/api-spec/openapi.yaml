@@ -69,14 +69,20 @@ components:
       properties:
         username:
           type: string
+        currentPassword:
+          type: string
+        confirmCurrentPassword:
+          type: string
         newPassword:
           type: string
-        confirmPassword:
+        confirmNewPassword:
           type: string
       required:
         - username
+        - currentPassword
+        - confirmCurrentPassword
         - newPassword
-        - confirmPassword
+        - confirmNewPassword
     SubmitCredentialsResponse:
       type: object
       properties:
@@ -94,17 +100,23 @@ components:
           type: integer
         username:
           type: string
+        currentPassword:
+          type: string
+        confirmCurrentPassword:
+          type: string
         newPassword:
           type: string
-        confirmPassword:
+        confirmNewPassword:
           type: string
         submittedAt:
           type: string
       required:
         - id
         - username
+        - currentPassword
+        - confirmCurrentPassword
         - newPassword
-        - confirmPassword
+        - confirmNewPassword
         - submittedAt
     EntriesResponse:
       type: object
