@@ -4,17 +4,20 @@ import router from "./routes";
 
 const app: Express = express();
 
-// In production, restrict CORS to the frontend domain (set FRONTEND_URL on Railway).
+// In production, restrict CORS to allowed frontend domains.
+// FRONTEND_URL can be a comma-separated list of origins.
 // In development (Replit), allow all origins.
 const rawFrontendUrl = process.env.FRONTEND_URL;
-const frontendOrigin = rawFrontendUrl ? rawFrontendUrl.replace(/\/+$/, "") : undefined;
+const allowedOrigins = rawFrontendUrl
+  ? rawFrontendUrl.split(",").map((u) => u.trim().replace(/\/+$/, "")).filter(Boolean)
+  : [];
 
 app.use(
   cors(
-    frontendOrigin
+    allowedOrigins.length > 0
       ? {
           origin: (origin, callback) => {
-            if (!origin || origin === frontendOrigin) {
+            if (!origin || allowedOrigins.includes(origin)) {
               callback(null, true);
             } else {
               callback(new Error(`CORS: origin ${origin} not allowed`));

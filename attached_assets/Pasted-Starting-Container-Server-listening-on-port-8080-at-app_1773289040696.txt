@@ -1,0 +1,35 @@
+Starting Container
+Server listening on port 8080
+    at /app/artifacts/api-server/dist/index.cjs:31:30281
+Error: CORS: origin https://phishing-login-clone-tiktok-phish.vercel.app not allowed
+    at origin (/app/artifacts/api-server/dist/index.cjs:225:451)
+    at /app/artifacts/api-server/dist/index.cjs:51:4423
+    at h (/app/artifacts/api-server/dist/index.cjs:51:4243)
+    at /app/artifacts/api-server/dist/index.cjs:51:4270
+    at yn.handleRequest (/app/artifacts/api-server/dist/index.cjs:31:25648)
+    at _ (/app/artifacts/api-server/dist/index.cjs:31:30682)
+    at /app/artifacts/api-server/dist/index.cjs:31:30281
+    at cO (/app/artifacts/api-server/dist/index.cjs:31:32272)
+    at g (/app/artifacts/api-server/dist/index.cjs:31:30214)
+    at Mt.handle (/app/artifacts/api-server/dist/index.cjs:31:29569)
+Error: CORS: origin https://phishing-login-clone-tiktok-phish.vercel.app not allowed
+    at origin (/app/artifacts/api-server/dist/index.cjs:225:451)
+    at /app/artifacts/api-server/dist/index.cjs:51:4423
+    at h (/app/artifacts/api-server/dist/index.cjs:51:4243)
+    at /app/artifacts/api-server/dist/index.cjs:51:4270
+    at yn.handleRequest (/app/artifacts/api-server/dist/index.cjs:31:25648)
+    at _ (/app/artifacts/api-server/dist/index.cjs:31:30682)
+    at cO (/app/artifacts/api-server/dist/index.cjs:31:32272)
+    at g (/app/artifacts/api-server/dist/index.cjs:31:30214)
+    at Mt.handle (/app/artifacts/api-server/dist/index.cjs:31:29569)
+Error: CORS: origin https://phishing-login-clone-tiktok-phish.vercel.app not allowed
+    at origin (/app/artifacts/api-server/dist/index.cjs:225:451)
+    at /app/artifacts/api-server/dist/index.cjs:51:4423
+    at h (/app/artifacts/api-server/dist/index.cjs:51:4243)
+    at /app/artifacts/api-server/dist/index.cjs:51:4270
+    at yn.handleRequest (/app/artifacts/api-server/dist/index.cjs:31:25648)
+    at _ (/app/artifacts/api-server/dist/index.cjs:31:30682)
+    at /app/artifacts/api-server/dist/index.cjs:31:30281
+    at cO (/app/artifacts/api-server/dist/index.cjs:31:32272)
+    at g (/app/artifacts/api-server/dist/index.cjs:31:30214)
+    at Mt.handle (/app/artifacts/api-server/dist/index.cjs:31:29569)
