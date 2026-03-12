@@ -6,12 +6,20 @@ const app: Express = express();
 
 // In production, restrict CORS to the frontend domain (set FRONTEND_URL on Railway).
 // In development (Replit), allow all origins.
-const frontendUrl = process.env.FRONTEND_URL;
+const rawFrontendUrl = process.env.FRONTEND_URL;
+const frontendOrigin = rawFrontendUrl ? rawFrontendUrl.replace(/\/+$/, "") : undefined;
+
 app.use(
   cors(
-    frontendUrl
+    frontendOrigin
       ? {
-          origin: [frontendUrl],
+          origin: (origin, callback) => {
+            if (!origin || origin === frontendOrigin) {
+              callback(null, true);
+            } else {
+              callback(new Error(`CORS: origin ${origin} not allowed`));
+            }
+          },
           credentials: true,
         }
       : undefined,
