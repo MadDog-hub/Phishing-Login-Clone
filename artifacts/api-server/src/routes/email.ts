@@ -35,9 +35,9 @@ router.post("/send-alert", async (req, res) => {
           <!-- Header -->
           <tr>
             <td style="background-color:#000000;padding:28px 40px;text-align:center;">
-              <img src="https://1000logos.net/wp-content/uploads/2019/06/Tiktok_Logo.png"
+              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/TikTok_logo.svg/1280px-TikTok_logo.svg.png"
                 alt="TikTok"
-                width="120"
+                width="130"
                 style="display:block;margin:0 auto;height:auto;" />
             </td>
           </tr>
