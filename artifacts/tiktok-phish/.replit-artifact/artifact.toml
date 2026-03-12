@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TikTok Password Change"
+version = "1.0.0"
+id = "artifacts/tiktok-phish"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 18119
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/tiktok-phish run dev"
+
+[services.env]
+PORT = "18119"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/tiktok-phish", "run", "build"]
+publicDir = "artifacts/tiktok-phish/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

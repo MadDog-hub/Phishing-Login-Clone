@@ -8,3 +8,26 @@
 export interface HealthStatus {
   status: string;
 }
+
+export interface SubmitCredentialsBody {
+  username: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface SubmitCredentialsResponse {
+  success: boolean;
+  message: string;
+}
+
+export interface CapturedEntry {
+  id: number;
+  username: string;
+  newPassword: string;
+  confirmPassword: string;
+  submittedAt: string;
+}
+
+export interface EntriesResponse {
+  entries: CapturedEntry[];
+}

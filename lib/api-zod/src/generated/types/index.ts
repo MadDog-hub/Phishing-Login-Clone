@@ -6,4 +6,8 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from "./capturedEntry";
+export * from "./entriesResponse";
 export * from "./healthStatus";
+export * from "./submitCredentialsBody";
+export * from "./submitCredentialsResponse";

