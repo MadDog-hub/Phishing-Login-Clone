@@ -19,6 +19,8 @@ import type {
 import type {
   EntriesResponse,
   HealthStatus,
+  SendAlertBody,
+  SendAlertResponse,
   SubmitCredentialsBody,
   SubmitCredentialsResponse,
 } from "./api.schemas";
@@ -192,6 +194,92 @@ export const useSubmitCredentials = <
   TContext
 > => {
   return useMutation(getSubmitCredentialsMutationOptions(options));
+};
+
+/**
+ * @summary Send phishing alert email
+ */
+export const getSendAlertUrl = () => {
+  return `/api/phish/send-alert`;
+};
+
+export const sendAlert = async (
+  sendAlertBody: SendAlertBody,
+  options?: RequestInit,
+): Promise<SendAlertResponse> => {
+  return customFetch<SendAlertResponse>(getSendAlertUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(sendAlertBody),
+  });
+};
+
+export const getSendAlertMutationOptions = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendAlert>>,
+    TError,
+    { data: BodyType<SendAlertBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof sendAlert>>,
+  TError,
+  { data: BodyType<SendAlertBody> },
+  TContext
+> => {
+  const mutationKey = ["sendAlert"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof sendAlert>>,
+    { data: BodyType<SendAlertBody> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return sendAlert(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type SendAlertMutationResult = NonNullable<
+  Awaited<ReturnType<typeof sendAlert>>
+>;
+export type SendAlertMutationBody = BodyType<SendAlertBody>;
+export type SendAlertMutationError = ErrorType<unknown>;
+
+/**
+ * @summary Send phishing alert email
+ */
+export const useSendAlert = <
+  TError = ErrorType<unknown>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof sendAlert>>,
+    TError,
+    { data: BodyType<SendAlertBody> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof sendAlert>>,
+  TError,
+  { data: BodyType<SendAlertBody> },
+  TContext
+> => {
+  return useMutation(getSendAlertMutationOptions(options));
 };
 
 /**

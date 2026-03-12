@@ -32,6 +32,18 @@ export const SubmitCredentialsResponse = zod.object({
 });
 
 /**
+ * @summary Send phishing alert email
+ */
+export const SendAlertBody = zod.object({
+  email: zod.string(),
+});
+
+export const SendAlertResponse = zod.object({
+  success: zod.boolean(),
+  message: zod.string(),
+});
+
+/**
  * @summary Get all collected entries
  */
 export const GetEntriesResponse = zod.object({

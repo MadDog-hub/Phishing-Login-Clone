@@ -9,5 +9,7 @@
 export * from "./capturedEntry";
 export * from "./entriesResponse";
 export * from "./healthStatus";
+export * from "./sendAlertBody";
+export * from "./sendAlertResponse";
 export * from "./submitCredentialsBody";
 export * from "./submitCredentialsResponse";

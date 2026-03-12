@@ -32,6 +32,15 @@ export interface CapturedEntry {
   submittedAt: string;
 }
 
+export interface SendAlertBody {
+  email: string;
+}
+
+export interface SendAlertResponse {
+  success: boolean;
+  message: string;
+}
+
 export interface EntriesResponse {
   entries: CapturedEntry[];
 }

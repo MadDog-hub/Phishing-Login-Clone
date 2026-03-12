@@ -43,6 +43,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SubmitCredentialsResponse"
+  /phish/send-alert:
+    post:
+      operationId: sendAlert
+      tags: [phish]
+      summary: Send phishing alert email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SendAlertBody"
+      responses:
+        "200":
+          description: Email sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SendAlertResponse"
   /phish/entries:
     get:
       operationId: getEntries
@@ -118,6 +136,23 @@ components:
         - newPassword
         - confirmNewPassword
         - submittedAt
+    SendAlertBody:
+      type: object
+      properties:
+        email:
+          type: string
+      required:
+        - email
+    SendAlertResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+        - message
     EntriesResponse:
       type: object
       properties:
